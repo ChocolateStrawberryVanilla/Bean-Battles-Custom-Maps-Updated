@@ -34,8 +34,11 @@ namespace BeanBattlesMapMaker
         public static Dictionary<GameObject, Tuple<string, int>> mapsDict = new Dictionary<GameObject, Tuple<string,int>>();
 
         public static int graceTime = 0;
-        public static Vector2 originalwinSize = Vector2.zero;
         public static int windowCount = 0;
+        public static bool open = true;
+
+        public static RectTransform winSize;
+        public static RectTransform winButton;
 
         public void Awake()
         {
@@ -67,6 +70,10 @@ namespace BeanBattlesMapMaker
             doGrace = GameObject.Find("GracePeriodButton").GetComponent<Toggle>();
             graceValue = GameObject.Find("GracePeriodSlider").GetComponent<Slider>();
 
+            winSize = GameObject.Find("Holder").GetComponent<RectTransform>();
+            winButton = GameObject.Find("TWindowButton").GetComponent<RectTransform>();
+
+
             graceValue.onValueChanged.AddListener(delegate {
                 graceTime = (int)(graceValue.value*100);
                 graceValue.gameObject.GetComponentInChildren<Text>().text = "Grace Time: " + graceTime;
@@ -91,26 +98,19 @@ namespace BeanBattlesMapMaker
             Button minimizeButton = GameObject.Find("TWindowButton").GetComponent<Button>();
             minimizeButton.onClick.AddListener(delegate ()
             {
-                var winSize = GameObject.Find("MapSelector").GetComponent<RectTransform>();
-                //Set windowsize counter upon init for later reference
-                if (windowCount == 0)
-                {
-                    originalwinSize = winSize.sizeDelta;
-                    windowCount += 1;
-                }
-                
-                //Debug.Log("Window size is: "+winSize.sizeDelta);
-                // If windowsize is the initial large size
-                if (winSize.sizeDelta.y == originalwinSize.y)
+                if (open)
                 {
                     //Make it squash
-                    winSize.sizeDelta = new Vector2(winSize.sizeDelta.x, 0);
+                    winSize.localScale = new Vector3(1, 0, 1);
+                    winButton.localRotation = Quaternion.Euler(0, 0, 180);
+                    open = false;
                 }
-                // If windowsize is different from init size
-                else if (winSize.sizeDelta.y != originalwinSize.y)
+                else if (!open)
                 {
                     // Put it back to normal
-                    winSize.sizeDelta = originalwinSize;
+                    winSize.localScale = new Vector3(1, 1, 1);
+                    winButton.localRotation = Quaternion.Euler(0, 0, 0);
+                    open = true;
                 }
             });
 

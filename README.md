@@ -1,8 +1,9 @@
-# Bean-Battles-Custom-Maps
-Custom map making/loading mod for Bean Battles
+# Bean-Battles-Custom-Maps-mod
+A mod of the "Custom map making/loading mod" for Bean Battles. This is a modded version Flarfo's BeanBattlesMapMaker. Therefore, either Flarfo's version or this version should be in the Bepinx plugins folder. Not both.
 
-Installation: https://www.youtube.com/watch?v=LKqCqfUcV_A&list=PL8_A1XBIbdkKR9wXkWJudVez3ZD7q7WBU
+Flarfo's installation guide: https://www.youtube.com/watch?v=LKqCqfUcV_A&list=PL8_A1XBIbdkKR9wXkWJudVez3ZD7q7WBU
 
+This mod makes the map window minimizable and changes the way it scrolls.
 
 # Changelog
 ### Feb 26, 2025

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeanBattlesMapMaker</RootNamespace>
-    <AssemblyName>BeanBattlesMapMaker</AssemblyName>
+    <AssemblyName>BBCM-mod</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -1,5 +1,5 @@
 # Ignore all folders with a period in front
 .*/
 # Ignore the debug folders but keep the folder for when stuff gets built
-BeanBattlesMapMaker/obj/Debug/*
-BeanBattlesMapMaker/bin/Debug/*
+#BeanBattlesMapMaker/obj/Debug/*
+#BeanBattlesMapMaker/bin/Debug/*

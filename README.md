@@ -22,6 +22,7 @@ This mod makes the map window minimizable and changes the way it scrolls.
 * Fixed circular references
 
 ### July 19, 2025
-* Made lobby names normal by default (no more tacking on the custom map name to the lobby name)
+* ~~Made lobby names normal by default (no more tacking on the custom map name to the lobby name)~~
     * Kept a "custom map name in lobby name" file patch that can replace the "Patches.cs" to bring back the old system when compiling the dll
     * Added the name of the map you're missing to the "missing map" error message to compensate for the lobby name changes
+* Will update normal lobby name implementation to respect new key handling, eventually

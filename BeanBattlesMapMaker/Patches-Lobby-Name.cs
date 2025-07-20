@@ -83,31 +83,36 @@ namespace BeanBattlesMapMaker
         [HarmonyPatch(typeof(CustomNetworkManager), "OnJoinMatch")]
         static bool Prefix(bool success, ref GG.Shared.Match match, CustomNetworkManager __instance)
         {
-            if (match.PublicData.TryGetValue("bb-custom-map", out string map))
+            string matchName = match.Name;
+
+            if (matchName.Contains("| CM: "))
             {
-                if (MapMakerPlugin.mapsList.ContainsKey(map))
+                string customMapName = matchName.Substring(matchName.LastIndexOf(':') + 2);
+
+                if (MapMakerPlugin.mapsList.ContainsKey(customMapName))
                 {
                     SetupMap.joinedCustomMap = true;
-                    SetupMap.selectedMap = MapMakerPlugin.mapsList[map];
+                    SetupMap.selectedMap = MapMakerPlugin.mapsList[customMapName];
                     return true;
                 }
-                __instance.gameLog.NewLog($"Custom Map '{map}' not Found!");
+
+                __instance.gameLog.NewLog("Custom Map not Found!");
                 return false;
             }
+
             SetupMap.isServer = false;
             return true;
         }
 
         [HarmonyPatch(typeof(GGServerManager), "CreateMatch")]
         [HarmonyPrefix]
-        static void MatchNamePatch(ref Dictionary<string, string> gameSpecificPublicData)
+        static void MatchNamePatch(ref string name)
         {
             if (SetupMap.selectedMapName != null)
             {
-                Debug.Log("Adding custom map name to public match data.");
-                gameSpecificPublicData.Add("bb-custom-map", SetupMap.selectedMapName);
+                Debug.Log("Adding custom map to lobby name.");
+                name += " | CM: " + SetupMap.selectedMapName;
             }
-
         }
 
         [HarmonyPatch(typeof(Health), "Respawn")]
